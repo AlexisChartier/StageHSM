@@ -58,15 +58,14 @@ def copy_files_on_ftp(ftp, base_dir, target_dir, pluvios, copied_files):
                 
                 # Lire le fichier source
                 ftp.voidcmd('TYPE I')  # Binaire
-                with ftp.transfercmd(f'RETR {file_name}') as src_file:
-                    # Changer vers le répertoire cible et écrire le fichier
-                    ftp.cwd(pluvio_target_dir)
-                    with ftp.transfercmd(f'STOR {file_name}') as dst_file:
-                        while True:
-                            data = src_file.recv(1024)
-                            if not data:
-                                break
-                            dst_file.sendall(data)
+                with open(file_name, 'wb') as fp:
+                    ftp.retrbinary('RETR ' + file_name, fp.write)
+                
+                # Changer vers le répertoire cible et écrire le fichier
+                ftp.cwd(pluvio_target_dir)
+                with open(file_name, 'rb') as fp:
+                    ftp.storbinary('STOR ' + file_name, fp.read)
+                
                 ftp.cwd(pluvio_source_dir)
 
 while True:
