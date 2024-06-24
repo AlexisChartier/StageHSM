@@ -12,6 +12,22 @@ class FTPClient:
         self.ftp = ftplib.FTP(self.server)
         self.ftp.login(self.username, self.password)
 
+    def list_files(self, directory):
+        """Liste les fichiers dans un répertoire FTP."""
+        self.ftp.cwd(directory)
+        files = self.ftp.nlst()
+        return files
+
+    def delete_files(self, directory, files_to_delete):
+        """Supprime les fichiers spécifiés d'un répertoire FTP."""
+        self.ftp.cwd(directory)
+        for file in files_to_delete:
+            try:
+                self.ftp.delete(file)
+                print(f"Supprimé : {file}")
+            except ftplib.error_perm as e:
+                print(f"Erreur lors de la suppression de {file}: {e}")
+
     def load_copied_files(self, pluvios):
         copied_files = {pluvio: set() for pluvio in pluvios}
         for pluvio in pluvios:
@@ -48,14 +64,6 @@ class FTPClient:
                 with open(local_file_path, 'rb') as local_file:
                     self.ftp.storbinary(f'STOR {remote_file_path}', local_file)
 
-    def delete_files(self, pluvio, processed_files):
-        pluvio_source_dir = os.path.join(self.source_dir, pluvio)
-        self.ftp.cwd(pluvio_source_dir)
-        file_list = self.ftp.nlst()
-        for file_name in file_list:
-            if file_name in processed_files:
-                self.ftp.delete(file_name)
-
     def copy_files_on_ftp(self, pluvios, copied_files):
         for pluvio in pluvios:
             pluvio_source_dir = f"{self.source_dir}{pluvio}/"
@@ -75,3 +83,6 @@ class FTPClient:
                     self.ftp.storbinary(f'STOR {file_name}', bio)
                     self.ftp.cwd(pluvio_source_dir)
                     copied_files[pluvio].add(file_name)
+    
+    def __del__(self):
+        self.ftp.quit()
