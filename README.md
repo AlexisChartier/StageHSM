@@ -42,65 +42,24 @@ Le projet est structuré pour suivre les bonnes pratiques de programmation, y co
 
 ### Processus Principaux
 
-#### Processus 0 (copieSansF.py)
+#### Processus 0 (copie de travail FTP)
 
 - **Objectif** : Copier les fichiers des pluviomètres spécifiques du FTP de base vers un répertoire de cible sur le FTP sans duplication.
 
 - **Description** : Ce processus se charge de copier les fichiers A0 (données brutes) sur le serveur FTP, en ne copiant que les pluviomètres Hydropolis et Polytech. À terme, les pluviomètres enverront directement les données vers le dossier « A ».
 
-#### Processus 1 Initial
+#### Processus 1 Initial (Traitement et concaténation)
 
 - **Objectif** : Télécharger, concaténer, calibrer, traiter les données des pluviomètres puis les transférer vers le FTP.
 
 - **Description** : Ce processus effectue les opérations initiales de traitement des données, y compris la concaténation des fichiers par année, la calibration des données et la création de matrices creuses. Les fichiers traités sont ensuite envoyés sur le FTP et les fichiers bruts sont supprimés après traitement.
 
-#### Processus 1 Léger
+#### Processus 1 Léger (Ajout et traitement des nouvelles données)
 
 - **Objectif** : Ajouter les nouvelles données des pluviomètres aux fichiers concaténés et traités, et supprimer les données du FTP une fois traitées.
 
 - **Description** : Ce processus est conçu pour être exécuté régulièrement afin de maintenir les données à jour. Il télécharge les nouvelles données, les ajoute aux fichiers existants, effectue les traitements nécessaires et met à jour les fichiers sur le FTP.
 
-## Dépendances
-
-Pour exécuter les scripts, vous devez installer les dépendances suivantes :
-
-```sh
-
-pip install pandas numpy scipy ftplib
-
-```
-
-## Configuration des Chemins et des Détails de Connexion
-
-Assurez-vous de configurer correctement les chemins et les détails de connexion dans les scripts, notamment :
-
-- **FTP_SERVER**
-
-- **FTP_USERNAME**
-
-- **FTP_PASSWORD**
-
-- **FTP_SOURCE_DIR**
-
-- **FTP_TARGET_DIR**
-
-- **LOCAL_TEMP_DIR**
-
-- **LOCAL_OUTPUT_DIR**
-
-- **CALIB_FILE**
-
-## Exécution des Scripts
-
-Chaque script principal (`main_process0.py`, `main_process1_initial.py`, `main_process1_light.py`) peut être exécuté individuellement pour accomplir les tâches respectives décrites ci-dessus.
-
-```sh
-
-python main_process0.py
-
-python main_process1_initial.py
-
-python main_process1_light.py
 
 ```
 
