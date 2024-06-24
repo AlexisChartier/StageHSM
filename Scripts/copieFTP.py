@@ -7,7 +7,7 @@ FTP_USERNAME = 'userird'
 FTP_PASSWORD = 'SfrA09=I'
 FTP_SOURCE_DIR = '/divers/Pluvio_Urbain/Polytech'
 FTP_TARGET_DIR = '/divers/copiePluvio/Polytech'
-LOCAL_TEMP_DIR = '/Users/david/Desktop/StageHSM/temp'
+LOCAL_TEMP_DIR = '/Users/david/Desktop/StageHSM/temp2'
 
 # Connexion au serveur FTP
 ftp = ftplib.FTP(FTP_SERVER)

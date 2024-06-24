@@ -1,6 +1,7 @@
 import ftplib
 import time
 import os
+import io
 
 # Détails de connexion FTP
 FTP_SERVER = 'ftp.hydrosciences.org'
@@ -13,7 +14,7 @@ FTP_TARGET_DIR = '/divers/copiePluvio/'
 PLUVIOS = ['Hydropolis', 'Polytech']
 
 # Fichier de suivi des fichiers copiés
-TRACKING_FILE = 'copied_files.txt'
+TRACKING_FILE = '/Users/david/Desktop/StageHSM/Scripts/copied_files.txt'
 
 def load_copied_files(tracking_file):
     if not os.path.exists(tracking_file):
@@ -21,9 +22,10 @@ def load_copied_files(tracking_file):
     copied_files = {pluvio: set() for pluvio in PLUVIOS}
     with open(tracking_file, 'r') as f:
         for line in f:
-            pluvio, file_name = line.strip().split(',', 1)
-            if pluvio in copied_files:
-                copied_files[pluvio].add(file_name)
+            if ',' in line:
+                pluvio, file_name = line.strip().split(',', 1)
+                if pluvio in copied_files:
+                    copied_files[pluvio].add(file_name)
     return copied_files
 
 def save_copied_file(tracking_file, pluvio, file_name):
@@ -39,8 +41,8 @@ ftp.login(FTP_USERNAME, FTP_PASSWORD)
 
 def copy_files_on_ftp(ftp, base_dir, target_dir, pluvios, copied_files):
     for pluvio in pluvios:
-        pluvio_source_dir = base_dir + pluvio
-        pluvio_target_dir = target_dir + pluvio
+        pluvio_source_dir = os.path.join(base_dir, pluvio)
+        pluvio_target_dir = os.path.join(target_dir, pluvio)
         
         try:
             ftp.mkd(pluvio_target_dir)
@@ -53,20 +55,23 @@ def copy_files_on_ftp(ftp, base_dir, target_dir, pluvios, copied_files):
         
         for file_name in file_list:
             if file_name not in copied_files[pluvio]:
-                copied_files[pluvio].add(file_name)
-                save_copied_file(TRACKING_FILE, pluvio, file_name)
-                
-                # Lire le fichier source
-                ftp.voidcmd('TYPE I')  # Binaire
-                with open(file_name, 'wb') as fp:
-                    ftp.retrbinary('RETR ' + file_name, fp.write)
-                
-                # Changer vers le répertoire cible et écrire le fichier
-                ftp.cwd(pluvio_target_dir)
-                with open(file_name, 'rb') as fp:
-                    ftp.storbinary('STOR ' + file_name, fp.read)
-                
-                ftp.cwd(pluvio_source_dir)
+                try:
+                    # Lire le fichier source dans un BytesIO
+                    bio = io.BytesIO()
+                    ftp.retrbinary(f'RETR {file_name}', bio.write)
+                    bio.seek(0)  # Remettre le pointeur au début du BytesIO
+                    
+                    # Changer vers le répertoire cible et écrire le fichier
+                    ftp.cwd(pluvio_target_dir)
+                    ftp.storbinary(f'STOR {file_name}', bio)
+                    
+                    # Revenir au répertoire source
+                    ftp.cwd(pluvio_source_dir)
+                    
+                    copied_files[pluvio].add(file_name)
+                    save_copied_file(TRACKING_FILE, pluvio, file_name)
+                except ftplib.error_perm as e:
+                    print(f"Erreur lors de la copie du fichier {file_name}: {e}")
 
 while True:
     # Copier les fichiers des pluviomètres spécifiques directement sur le serveur FTP
