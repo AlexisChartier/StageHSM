@@ -59,10 +59,3 @@ Le projet est structuré pour suivre les bonnes pratiques de programmation, y co
 - **Objectif** : Ajouter les nouvelles données des pluviomètres aux fichiers concaténés et traités, et supprimer les données du FTP une fois traitées.
 
 - **Description** : Ce processus est conçu pour être exécuté régulièrement afin de maintenir les données à jour. Il télécharge les nouvelles données, les ajoute aux fichiers existants, effectue les traitements nécessaires et met à jour les fichiers sur le FTP.
-
-
-```
-
-## Organisation des Transferts de Données
-
-Les scripts sont conçus pour organiser l'exécution des processus à différents intervalles de temps et pour gérer les transferts de données de manière efficace. Ils stockent les données de manière structurée et les mettent à disposition pour les différentes applications web et sites utilisant ces données.
