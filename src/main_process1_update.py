@@ -9,11 +9,11 @@ from utils import delete_local_files
 FTP_SERVER = 'ftp.hydrosciences.org'
 FTP_USERNAME = 'userird'
 FTP_PASSWORD = 'SfrA09=I'
-FTP_SOURCE_DIR = '/source_directory/'
-FTP_TARGET_DIR = '/divers/copiePluvio/'
-LOCAL_TEMP_DIR = '/home/ubuntu/temp/'
-LOCAL_OUTPUT_DIR = '/home/ubuntu/processed/'
-CALIB_FILE = '/home/ubuntu/scripts/calib.csv'
+FTP_SOURCE_DIR = '/divers/copiePluvio/'
+FTP_TARGET_DIR = '/divers/copiePluvio/Processed/'
+LOCAL_TEMP_DIR = '/home/ubuntu/gestionpluvio/temp/'
+LOCAL_OUTPUT_DIR = '/home/ubuntu/gestionpluvio/processed/'
+CALIB_FILE = '/home/ubuntu/gestionpluvio/src/calib.csv'
 PLUVIOS = ['Hydropolis', 'Polytech']
 
 def main():
