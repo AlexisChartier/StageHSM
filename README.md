@@ -95,11 +95,11 @@ Le projet est structuré pour suivre les bonnes pratiques de programmation, y co
 
 - Sur macOS ou Linux, ouvrez le Terminal et entrez :
 
-  ```
+```
 
-    ssh username@server_ip
+ssh username@server_ip
 
-  ```
+```
 
   Remplacez `username` par votre nom d'utilisateur SSH et `server_ip` par l'adresse IP du serveur OVH.
 
@@ -159,59 +159,59 @@ Le projet est structuré pour suivre les bonnes pratiques de programmation, y co
 
 - Si vous n'avez pas encore créé un environnement virtuel, utilisez la commande suivante :
 
-  ```
+```
 
   python3 -m venv myenv
 
-  ```
+```
 
 **Étape 2: Activer l'environnement virtuel**
 
 - Sur macOS ou Linux :
 
-  ```
+```
 
   source myenv/bin/activate
 
-  ```
+```
 
 - Sur Windows :
 
-  ```
+```
 
   myenv\Scripts\activate
 
-  ```
+```
 
 **Étape 3: Installer les dépendances nécessaires**
 
 - Assurez-vous que votre environnement virtuel est activé et installez les dépendances nécessaires :
 
-  ```
+```
 
   pip install -r requirements.txt
 
-  ```
+```
 
 **Étape 4: Lancer manuellement un script**
 
 - Exécutez votre script Python dans l'environnement virtuel activé :
 
-  ```
+```
 
   python script_name.py
 
-  ```
+```
 
 **Étape 5: Désactiver l'environnement virtuel**
 
 - Pour désactiver l'environnement virtuel, utilisez la commande suivante :
 
-  ```
+```
 
   deactivate
 
-  ```
+```
 
 ---
 
@@ -261,37 +261,37 @@ Chaque ligne dans le crontab représente une tâche planifiée et suit cette syn
 
 - Exécuter un script chaque jour à minuit :
 
-  ```
+```
 
   0 0 * * * /usr/bin/python3 /path/to/script.py
 
-  ```
+```
 
 - Exécuter un script toutes les heures :
 
-  ```
+```
 
   0 * * * * /usr/bin/python3 /path/to/script.py
 
-  ```
+```
 
 - Exécuter un script chaque lundi à 8 heures du matin :
 
-  ```
+```
 
   0 8 * * 1 /usr/bin/python3 /path/to/script.py
 
-  ```
+```
 
 **Étape 4: Utiliser un environnement virtuel avec CRON**
 
 - Pour utiliser un environnement virtuel avec CRON, spécifiez l'activation de l'environnement virtuel avant d'exécuter le script. Par exemple :
 
-  ```
+```
 
   0 0 * * * /bin/bash -c 'source /path/to/myenv/bin/activate && /usr/bin/python /path/to/script.py'
 
-  ```
+```
 
 **Étape 5: Sauvegarder et quitter**
 
