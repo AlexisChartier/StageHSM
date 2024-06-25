@@ -97,7 +97,7 @@ Le projet est structuré pour suivre les bonnes pratiques de programmation, y co
 
   ```
 
-  ssh username@server_ip
+    ssh username@server_ip
 
   ```
 
