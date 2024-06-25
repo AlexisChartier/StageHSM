@@ -10,7 +10,7 @@ Le projet est structuré pour suivre les bonnes pratiques de programmation, y co
 
 ```
 
-/process
+/src
 
     /modules
 
@@ -95,7 +95,7 @@ Le projet est structuré pour suivre les bonnes pratiques de programmation, y co
 
 - Sur macOS ou Linux, ouvrez le Terminal et entrez :
 
-  ```sh
+  ```
 
   ssh username@server_ip
 
@@ -159,7 +159,7 @@ Le projet est structuré pour suivre les bonnes pratiques de programmation, y co
 
 - Si vous n'avez pas encore créé un environnement virtuel, utilisez la commande suivante :
 
-  ```sh
+  ```
 
   python3 -m venv myenv
 
@@ -169,7 +169,7 @@ Le projet est structuré pour suivre les bonnes pratiques de programmation, y co
 
 - Sur macOS ou Linux :
 
-  ```sh
+  ```
 
   source myenv/bin/activate
 
@@ -177,7 +177,7 @@ Le projet est structuré pour suivre les bonnes pratiques de programmation, y co
 
 - Sur Windows :
 
-  ```sh
+  ```
 
   myenv\Scripts\activate
 
@@ -187,7 +187,7 @@ Le projet est structuré pour suivre les bonnes pratiques de programmation, y co
 
 - Assurez-vous que votre environnement virtuel est activé et installez les dépendances nécessaires :
 
-  ```sh
+  ```
 
   pip install -r requirements.txt
 
@@ -197,7 +197,7 @@ Le projet est structuré pour suivre les bonnes pratiques de programmation, y co
 
 - Exécutez votre script Python dans l'environnement virtuel activé :
 
-  ```sh
+  ```
 
   python script_name.py
 
@@ -207,7 +207,7 @@ Le projet est structuré pour suivre les bonnes pratiques de programmation, y co
 
 - Pour désactiver l'environnement virtuel, utilisez la commande suivante :
 
-  ```sh
+  ```
 
   deactivate
 
@@ -225,7 +225,7 @@ CRON est un service Linux qui exécute des tâches planifiées à des intervalle
 
 Pour éditer le crontab pour l'utilisateur actuel, exécutez :
 
-```sh
+```
 
 crontab -e
 
@@ -261,7 +261,7 @@ Chaque ligne dans le crontab représente une tâche planifiée et suit cette syn
 
 - Exécuter un script chaque jour à minuit :
 
-  ```sh
+  ```
 
   0 0 * * * /usr/bin/python3 /path/to/script.py
 
@@ -269,7 +269,7 @@ Chaque ligne dans le crontab représente une tâche planifiée et suit cette syn
 
 - Exécuter un script toutes les heures :
 
-  ```sh
+  ```
 
   0 * * * * /usr/bin/python3 /path/to/script.py
 
@@ -277,7 +277,7 @@ Chaque ligne dans le crontab représente une tâche planifiée et suit cette syn
 
 - Exécuter un script chaque lundi à 8 heures du matin :
 
-  ```sh
+  ```
 
   0 8 * * 1 /usr/bin/python3 /path/to/script.py
 
@@ -287,7 +287,7 @@ Chaque ligne dans le crontab représente une tâche planifiée et suit cette syn
 
 - Pour utiliser un environnement virtuel avec CRON, spécifiez l'activation de l'environnement virtuel avant d'exécuter le script. Par exemple :
 
-  ```sh
+  ```
 
   0 0 * * * /bin/bash -c 'source /path/to/myenv/bin/activate && /usr/bin/python /path/to/script.py'
 
@@ -301,7 +301,7 @@ Après avoir édité le fichier crontab, sauvegardez les modifications et quitte
 
 Pour lister les tâches CRON actuelles, utilisez :
 
-```sh
+```
 
 crontab -l
 
@@ -309,7 +309,7 @@ crontab -l
 
 Pour supprimer toutes les tâches CRON de l'utilisateur actuel :
 
-```sh
+```
 
 crontab -r
 
@@ -319,7 +319,7 @@ crontab -r
 
 Les tâches CRON envoient par défaut un e-mail à l'utilisateur pour chaque commande exécutée. Vous pouvez rediriger la sortie des commandes vers un fichier pour les vérifier plus tard :
 
-```sh
+```
 
 0 0 * * * /bin/bash -c 'source /path/to/myenv/bin/activate && /usr/bin/python /path/to/script.py' >> /path/to/logfile 2>&1
 
