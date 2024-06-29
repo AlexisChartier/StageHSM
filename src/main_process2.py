@@ -6,8 +6,8 @@ from utils import delete_local_files
 FTP_SERVER = 'ftp.hydrosciences.org'
 FTP_USERNAME = 'userird'
 FTP_PASSWORD = 'SfrA09=I'
-FTP_TARGET_DIR = '/divers/copiePluvio/'
-LOCAL_OUTPUT_DIR = '/home/ubuntu/processed/'
+FTP_TARGET_DIR = '/divers/copiePluvio/Processed'
+LOCAL_OUTPUT_DIR = '/home/ubuntu/gestionpluvio/processed'
 
 # Pluviomètres spécifiques à traiter
 PLUVIOS = ['Hydropolis', 'Polytech']
