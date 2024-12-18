@@ -6,10 +6,10 @@ import matplotlib.pyplot as plt
 from datetime import datetime, timedelta
 from ftp_module import FTPManager
 
-# Configuration FTP
-FTP_HOST = "ftp.hydrosciences.org"
-FTP_USER = "userird"
-FTP_PASS = "SfrA09=I"
+# Configuration FTP (use environment variables for security)
+FTP_HOST = os.getenv('FTP_HOST')
+FTP_USER = os.getenv('FTP_USER')
+FTP_PASS = os.getenv('FTP_PASS')
 
 # Liste des stations pluviométriques à traiter
 Station_list = [
