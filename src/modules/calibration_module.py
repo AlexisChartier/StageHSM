@@ -19,5 +19,12 @@ class Calibration:
         station = data['Station'].iloc[0]
         if station in self.calibration:
             a, b, c = self.calibration[station]
+            # Convertir 'Rain' en numérique, remplacer 'na' par NaN
+            data['Rain'] = pd.to_numeric(data['Rain'], errors='coerce')
+            # Appliquer la calibration
             data['Rain'] = a * data['Rain'] ** 2 + b * data['Rain'] + c
+            # Convertir les NaN en 'na'
+            data['Rain'] = data['Rain'].fillna('na')
+        else:
+            print(f"Paramètres de calibration non trouvés pour la station {station}.")
         return data
